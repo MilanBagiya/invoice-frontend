@@ -1,0 +1,93 @@
+:host {
+  .mat-mdc-dialog-content {
+    max-height: 80vh !important;
+  }
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.dialog-icon {
+  font-size: 24px;
+  color: #3f51b5;
+}
+
+.dialog-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.dialog-close {
+  color: #757575;
+}
+
+.section {
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #3f51b5;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.item-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.item-field {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .dialog-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .submit-button,
+  .cancel-button {
+    width: 100%;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: stretch;
+  gap: 10px;
+}

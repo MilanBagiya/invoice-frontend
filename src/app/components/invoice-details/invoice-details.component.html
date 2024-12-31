@@ -1,0 +1,68 @@
+<div
+  *ngIf="invoiceDetails"
+  class="invoice-details bg-white shadow-lg rounded-lg p-6"
+>
+  <div class="invoice-header border-b pb-4 mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Invoice Details</h1>
+    <p class="text-gray-500">Invoice #{{ invoiceDetails.invoiceNumber }}</p>
+  </div>
+
+  <div class="invoice-section mb-6">
+    <h2 class="section-title text-lg font-semibold text-gray-700">From</h2>
+    <p class="text-gray-600 mt-2">
+      <span class="font-medium">Name:</span> {{ invoiceDetails.fromName }}
+    </p>
+    <p class="text-gray-600">
+      <span class="font-medium">Address:</span> {{ invoiceDetails.fromAddress }}
+    </p>
+  </div>
+
+  <div class="invoice-section mb-6">
+    <h2 class="section-title text-lg font-semibold text-gray-700">To</h2>
+    <p class="text-gray-600 mt-2">
+      <span class="font-medium">Name:</span> {{ invoiceDetails.toName }}
+    </p>
+    <p class="text-gray-600">
+      <span class="font-medium">Address:</span> {{ invoiceDetails.toAddress }}
+    </p>
+  </div>
+
+  <div class="invoice-section mb-6">
+    <h2 class="section-title text-lg font-semibold text-gray-700">Items</h2>
+    <div
+      *ngFor="let item of invoiceDetails.items"
+      class="invoice-item bg-gray-50 p-4 rounded-md shadow-sm mt-4"
+    >
+      <p class="text-gray-600">
+        <span class="font-medium">Item:</span> {{ item.itemName }}
+      </p>
+      <p class="text-gray-600">
+        <span class="font-medium">Quantity:</span> {{ item.quantity }}
+      </p>
+      <p class="text-gray-600">
+        <span class="font-medium">Rate:</span> {{ item.rate }}
+      </p>
+      <p class="text-gray-600">
+        <span class="font-medium">Total:</span> {{ item.quantity * item.rate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="total-amount bg-gray-100 p-4 rounded-lg shadow-md">
+    <h2 class="text-xl font-bold text-gray-700">
+      Total Amount:
+      <span class="text-green-600">{{ invoiceDetails.totalAmount }}</span>
+    </h2>
+  </div>
+
+  <div class="actions mt-6 text-right">
+    <button
+      mat-raised-button
+      color="warn"
+      class="cancel-button"
+      (click)="closeDialog()"
+    >
+      Close
+    </button>
+  </div>
+</div>

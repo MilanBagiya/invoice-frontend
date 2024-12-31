@@ -1,0 +1,112 @@
+<mat-dialog-content>
+  <div class="dialog-header">
+    <mat-icon class="dialog-icon">receipt_long</mat-icon>
+    <span class="dialog-title">Create Invoice</span>
+    <button
+      mat-icon-button
+      class="dialog-close"
+      aria-label="Close"
+      (click)="closeDialog()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="invoiceForm" novalidate>
+    <div class="wrapper">
+      <div class="section">
+        <h3 class="section-title">From Details</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="fromName" required />
+          <mat-error *ngIf="invoiceForm.get('fromName')?.hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="fromAddress" required></textarea>
+          <mat-error
+            *ngIf="invoiceForm.get('fromAddress')?.hasError('required')"
+          >
+            Address is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">To Details</h3>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="toName" required />
+          <mat-error *ngIf="invoiceForm.get('toName')?.hasError('required')">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="toAddress" required></textarea>
+          <mat-error *ngIf="invoiceForm.get('toAddress')?.hasError('required')">
+            Address is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div formArrayName="items" class="section">
+      <h3 class="section-title">Item Details</h3>
+      <div
+        class="item-container"
+        *ngFor="let item of items.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <mat-form-field appearance="outline" class="item-field">
+          <mat-label>Item Name</mat-label>
+          <input matInput formControlName="itemName" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item-field">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" formControlName="quantity" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item-field">
+          <mat-label>Rate</mat-label>
+          <input matInput type="number" formControlName="rate" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="item-field">
+          <mat-label>Total</mat-label>
+          <input matInput [value]="calculateTotal(i) | currency" disabled />
+        </mat-form-field>
+        <button
+          mat-icon-button
+          aria-label="Remove Item"
+          (click)="removeItem(i)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <button mat-raised-button color="primary" (click)="addItem()">
+        Add Item
+      </button>
+    </div>
+
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-button"
+        [disabled]="!invoiceForm.valid"
+        (click)="submitInvoice()"
+      >
+        Save
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="cancel-button"
+        (click)="closeDialog()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>
